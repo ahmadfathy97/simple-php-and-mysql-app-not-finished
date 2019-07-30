@@ -2,9 +2,9 @@
 include "./config.php";
 if($_GET["id"]){
     $id = $_GET["id"];
-    $query = "SELECT * from users WHERE id = $id";
+    $query = "SELECT * from posts WHERE id = $id";
     $result2 = mysqli_query($conn, $query);
-    $user = mysqli_fetch_array($result2);
+    $post = mysqli_fetch_array($result2);
 }
 $conn->close();
 ?>
@@ -15,6 +15,11 @@ $conn->close();
     <title>TEST</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
+        .post{
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0px 0px 15px #0080aa;
+        }
     </style>
 </head>
 <body>
@@ -22,13 +27,9 @@ $conn->close();
 if($_GET["id"]){
     echo "
     <div class='container'>
-        <h1>${user['name']}</h1>
-        <h2>ABOUT</h2>
-        <p>${user['about']}</p>
-        <h2>BORN IN</h2>
-        <p>${user['birth']}</p>
-        <h2>EMAIL</h2>
-        <p>${user['email']}</p>
+        <h1>${post['title']}</h1>
+        <span>${post['post_date']}</span>
+        <p>${post['body']}</p>
     </div>";
 } else{ 
     echo "-_-";

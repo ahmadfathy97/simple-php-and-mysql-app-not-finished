@@ -12,10 +12,14 @@ $conn->close();
     <title>TEST</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
+        body{
+            background: #e8e8e8
+        }
         .post{
             padding: 20px;
             margin: 20px auto;
-            box-shadow: 0px 0px 15px #0080aa;
+            background: #f6f6f6;
+            box-shadow: 0px 0px 10px #888;
         }
     </style>
 </head>
@@ -23,15 +27,23 @@ $conn->close();
    <div class="container">
    <ul class="nav nav-fixed">
           <li><a href="/app/user.php/?id=<?php echo $_SESSION["user"]["id"] ?>">Profile</a></li>
-      </ul>
+   </ul>
    <h1>POSTS</h1>
     <?php if($_SESSION["user"]){ ?>
        <?php foreach($data as $posts): ?>
-       <div class="btn-primary post">
-           <h2><?php echo $posts["title"] ?></h2>
+       <div class="btn-default post">
+           <h2>
+               <a href=<?php echo "/app/post.php/?id=${posts['id']}"; ?>>
+                   <?php echo $posts["title"] ?>
+               </a>
+           </h2>
            <span><?php echo $posts["post_date"] ?></span>
            <p><?php echo $posts["body"] ?></p>
-           <p>by: <?php echo $posts["name"] ?></p>
+           <p>by:
+               <a href= <?php echo "/app/user.php/?id=${posts['user_id']}" ?> >
+                   <?php echo $posts["name"] ?>
+               </a>
+           </p>
 
        </div>
        <?php endforeach; ?>

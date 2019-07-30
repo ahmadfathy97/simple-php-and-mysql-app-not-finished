@@ -1,20 +1,24 @@
 <?php
 include "./config.php";
-if(isset($_POST["post"])){
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $birth = $_POST["birth"];
-    $about = $_POST["about"];
+if(!$_SESSION["user"]){
+    if(isset($_POST["post"])){
+        $name = $_POST["name"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $birth = $_POST["birth"];
+        $about = $_POST["about"];
 
-    $sql = "INSERT INTO users (name, email, password, about, birth) VALUES ('$name', '$email', '$password' , ' $about', '$birth')";
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $sql = "INSERT INTO users (name, email, password, about, birth) VALUES ('$name', '$email', '$password' , ' $about', '$birth')";
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    } else{
+        echo "hi";
     }
 } else{
-    echo "hi";
+    header('location: /app/index.php')
 }
 $conn->close();
 ?>
